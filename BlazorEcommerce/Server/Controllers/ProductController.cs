@@ -14,8 +14,11 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    public Task<List<Product>> GetProduct()
+    public async Task<ServiceResponse<List<Product>>> GetProduct()
     {
-        return this.context.Products.ToListAsync();
+        return new ServiceResponse<List<Product>>()
+        {
+            Data = await this.context.Products.ToListAsync()
+        };
     }
 }
